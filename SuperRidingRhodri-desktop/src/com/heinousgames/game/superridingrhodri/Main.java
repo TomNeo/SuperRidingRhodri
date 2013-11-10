@@ -1,5 +1,6 @@
 package com.heinousgames.game.superridingrhodri;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -11,6 +12,6 @@ public class Main {
 		cfg.width = 480;
 		cfg.height = 320;
 		
-		new LwjglApplication(new Main(), cfg);
+		new LwjglApplication((ApplicationListener) new Main(), cfg);
 	}
 }
