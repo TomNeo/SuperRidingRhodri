@@ -37,8 +37,8 @@ public class MainClass implements ApplicationListener {
 
 	@Override
 	public void create() {
-		playerTexture = new Texture("gfx/tiles/tileset.png");
-		tRegion = new TextureRegion(playerTexture, 96, 32, 32, 32);
+		playerTexture = new Texture("gfx/rhondi.png");
+		tRegion = new TextureRegion(playerTexture, 0, 0, 30, 62);
 
 		deerTickMusic = Gdx.audio.newMusic(Gdx.files.internal("sfx/dishes2.ogg"));
 		shapeRenderer = new ShapeRenderer();
@@ -67,17 +67,17 @@ public class MainClass implements ApplicationListener {
 		sb = 0;
 
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
-		map = new TmxMapLoader().load("gfx/deerTick.tmx");
+		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);
 
 		// create an orthographic camera, shows us 30x20 units of the world
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 15, 10);
+		camera.setToOrtho(false, 30, 20);
 		camera.update();
 
 		// create the Koala we want to move around the world
 		player = new Player(map);
-		player.position.set(8, 1);
+		player.position.set(14, 98);
 
 		// start the playback of the background music immediately
 		deerTickMusic.setLooping(true);
@@ -113,7 +113,7 @@ public class MainClass implements ApplicationListener {
 
 		// let the camera follow the player, x-axis only
 		camera.position.x = player.position.x;
-		//camera.position.y = player.position.y;
+		camera.position.y = player.position.y;
 
 		camera.update();
 		

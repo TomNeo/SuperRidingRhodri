@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Miniamlist" tilewidth="32" tileheight="32">
+  <image source="tileset.png" trans="ff00ff" width="256" height="128"/>
+ </tileset>
+ <layer name="Deadly layer Layer 1" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DoQkAAAgAMG/w/2MtZqOgbLAIAAAAAAAAtmSHz3IIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABcUxlOLRUCcAAA=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="100" height="100">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UQQqAMAwEwBZPevT/jxXRiyJVQisVZ2CPIZCFpAQAAAAA8EzeQx9yeqeT6bRrbLzvq/JFalp7GArRy9FVH7UzF1Ka+7voDfTRTuQWd31EZ9nU/lfRXcTooy/6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIGoBGdXq/UCcAAA=
+  </data>
+ </layer>
+</map>
