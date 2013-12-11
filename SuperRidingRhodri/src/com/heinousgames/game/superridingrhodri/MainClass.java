@@ -75,7 +75,7 @@ public class MainClass implements ApplicationListener {
 		camera.setToOrtho(false, 30, 20);
 		camera.update();
 
-		// create the Koala we want to move around the world
+		// create the rhodri we want to move around the world
 		player = new Player(map);
 		player.position.set(14, 98);
 
@@ -111,7 +111,7 @@ public class MainClass implements ApplicationListener {
 		// update the player (process input, collision detection, position update)
 		player.updatePlayer(delta);
 
-		// let the camera follow the player, x-axis only
+	
 		camera.position.x = player.position.x;
 		camera.position.y = player.position.y;
 
@@ -122,12 +122,12 @@ public class MainClass implements ApplicationListener {
 		renderer.setView(camera);
 		renderer.render();
 			
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(sr, sg, sb, 1);
-		shapeRenderer.rect(12, 7, 4, 2);
+//		shapeRenderer.setProjectionMatrix(camera.combined);
+//		shapeRenderer.begin(ShapeType.Filled);
+//		shapeRenderer.setColor(sr, sg, sb, 1);
+//		shapeRenderer.rect(12, 7, 4, 2);
 		//shapeRenderer.circle(x, y, radius);
-		shapeRenderer.end();
+//		shapeRenderer.end();
 		
 		//System.out.println(songTime);
 		

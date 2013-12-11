@@ -15,11 +15,13 @@ public class Main implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	private LevelLoader levelLoader;
 	
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
+		levelLoader = new LevelLoader();
 		
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();

@@ -17,6 +17,8 @@ public class Player {
 	public Player (TiledMap Map) {
 		this.map = Map;
 	}
+	
+	
 
 	public static float WIDTH;
 	public static float HEIGHT;
@@ -157,7 +159,7 @@ public class Player {
 		getDeadlyTiles(startX, startY, endX, endY, deadlyTiles);
 		for (Rectangle tile: deadlyTiles) {
 			if(playerRect.overlaps(tile)) {
-				position.set(8,1);
+				position.set(14, 98);
 				break;
 			}
 		}
