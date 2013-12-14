@@ -11,14 +11,28 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class LevelTemplate implements Level{
 
+	int startX;
+	int startY;
 	private TiledMap map;	
 	
+	public LevelTemplate(){
+		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
+		startX = 14;
+		startY = 98;
+	}
+	
+	/* Eventually, each level will be able to be made in tiled with any number of layers and we could specify 
+	 * rendering order here. I want us to try and keep to a convention for our maps just so we can copy as much code 
+	 * as possible for these level specific things
+	 */
 	@Override
 	public void render(OrthogonalTiledMapRenderer renderer) {
-		
+	
+		/* This is just copied from player, using it as reference for extracting layer information 
+		 * 
+		 */
 //		map = new TmxMapLoader().load("tmxFileName.tmx");
 		
-		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
 		// TODO Auto-generated method stub
 //		private void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
 //			TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(1);
@@ -36,6 +50,23 @@ public class LevelTemplate implements Level{
 //			}
 //		}
 
+	}
+
+	//Needed so that each map has the tmx connected to its code. LevelLoader can get map easily.
+	@Override
+	public TiledMap getMap() {
+		return map;
+	}
+
+	@Override
+	public int getStartX() {
+		return startX;
+	}
+
+	@Override
+	public int getStartY() {
+		// TODO Auto-generated method stub
+		return startY;
 	}
 	
 	

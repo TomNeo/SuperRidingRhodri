@@ -25,7 +25,8 @@ public class MainClass implements ApplicationListener {
 	private float songTime;
 
 	private ShapeRenderer shapeRenderer;
-
+	
+	private LevelLoader levelLoader;
 	private Texture playerTexture;
 	private TextureRegion tRegion;
 	private Player player;
@@ -66,10 +67,17 @@ public class MainClass implements ApplicationListener {
 		sg = 1;
 		sb = 0;
 
+		/*first implementation of levelloader. On game create it will load with the current dummy level "LevelTemplate"
+		 * this section of code will be redone and probably relocated, but I needed to start somewhere.
+		 */
+		levelLoader = new LevelLoader();
+		levelLoader.add(0, new LevelTemplate());
+		levelLoader.setCurrentLevel(levelLoader.queue.get(0));
+		
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
-		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
-		renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);
-
+		map = levelLoader.getCurrentLevel().getMap();
+		renderer = new OrthogonalTiledMapRenderer(levelLoader.getCurrentLevel().getMap(), 1 / 32f);
+		
 		// create an orthographic camera, shows us 30x20 units of the world
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 30, 20);
@@ -77,7 +85,7 @@ public class MainClass implements ApplicationListener {
 
 		// create the rhodri we want to move around the world
 		player = new Player(map);
-		player.position.set(14, 98);
+		player.position.set(levelLoader.getCurrentLevel().getStartX(),levelLoader.getCurrentLevel().getStartY());
 
 		// start the playback of the background music immediately
 		deerTickMusic.setLooping(true);
