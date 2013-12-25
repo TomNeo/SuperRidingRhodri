@@ -6,8 +6,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 public interface Level {
 	
 	void render(OrthogonalTiledMapRenderer renderer);
+	void logic();
 	TiledMap getMap();
 	int getStartX();
 	int getStartY();
-	
 }

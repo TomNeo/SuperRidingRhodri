@@ -48,6 +48,10 @@ public class Player {
 	private Array<Rectangle> tiles = new Array<Rectangle>();
 	private Array<Rectangle> deadlyTiles = new Array<Rectangle>();
 
+	public void changeMap(TiledMap newMap){
+		this.map = newMap;
+	}
+	
 	public void updatePlayer(float deltaTime) {
 		if(deltaTime == 0) return;
 		stateTime += deltaTime;

@@ -51,6 +51,10 @@ public class LevelTemplate implements Level{
 //		}
 
 	}
+	
+	public void logic(){
+		//Level specific logic (cutscene, special one time thing, graphical manipulations)
+	}
 
 	//Needed so that each map has the tmx connected to its code. LevelLoader can get map easily.
 	@Override
