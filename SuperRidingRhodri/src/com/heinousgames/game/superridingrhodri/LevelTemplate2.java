@@ -10,13 +10,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 
-public class LevelTemplate implements Level{
+public class LevelTemplate2 implements Level{
 
 	int startX;
 	int startY;
 	private TiledMap map;	
 	
-	public LevelTemplate(){
+	public LevelTemplate2(){
 		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
 		startX = 14;
 		startY = 98;
@@ -70,7 +70,6 @@ public class LevelTemplate implements Level{
 
 	@Override
 	public int getStartY() {
-		// TODO Auto-generated method stub
 		return startY;
 	}
 

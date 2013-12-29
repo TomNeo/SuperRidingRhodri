@@ -17,7 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class MainClass implements ApplicationListener {
 	public static TiledMap map;
-	private OrthogonalTiledMapRenderer renderer;
+	private CustomTiledRenderer renderer;
 	private OrthographicCamera camera;
 	private double sin;
 	private float r, g, b, time, delta, sr, sg, sb;
@@ -71,12 +71,12 @@ public class MainClass implements ApplicationListener {
 		 * this section of code will be redone and probably relocated, but I needed to start somewhere.
 		 */
 		levelLoader = new LevelLoader();
-		levelLoader.add(0, new LevelTemplate());
+		levelLoader.add(0, new LevelTemplate1());
 		levelLoader.setCurrentLevel(levelLoader.queue.get(0));
 		
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
 		map = levelLoader.getCurrentLevel().getMap();
-		renderer = new CustomTiledRenderer(levelLoader.getCurrentLevel().getMap(), 1 / 32f);
+		renderer = new CustomTiledRenderer(levelLoader.getCurrentLevel(), 1 / 32f);
 		
 		// create an orthographic camera, shows us 30x20 units of the world
 		camera = new OrthographicCamera();
@@ -88,8 +88,8 @@ public class MainClass implements ApplicationListener {
 		player.position.set(levelLoader.getCurrentLevel().getStartX(),levelLoader.getCurrentLevel().getStartY());
 
 		// start the playback of the background music immediately
-		deerTickMusic.setLooping(true);
-		deerTickMusic.play();
+		//deerTickMusic.setLooping(true);
+		//deerTickMusic.play();
 
 	}
 
@@ -128,7 +128,12 @@ public class MainClass implements ApplicationListener {
 		// set the tile map renderer view based on what the
 		// camera sees and render the map
 		renderer.setView(camera);
-		renderer.render();
+		
+		//THIS IS THE NORMAL METHOD FOR RENDERER
+		//renderer.render();
+		
+		//THIS IS THE RENDER METHOD FOR LEVELTEMPLATE1
+		renderer.renderMode1();
 			
 //		shapeRenderer.setProjectionMatrix(camera.combined);
 //		shapeRenderer.begin(ShapeType.Filled);

@@ -47,6 +47,7 @@ public class Player {
 	};
 	private Array<Rectangle> tiles = new Array<Rectangle>();
 	private Array<Rectangle> deadlyTiles = new Array<Rectangle>();
+	private Array<Rectangle> doors = new Array<Rectangle>();
 
 	public void changeMap(TiledMap newMap){
 		this.map = newMap;
@@ -114,12 +115,21 @@ public class Player {
 		endY = (int)(position.y + Player.HEIGHT);
 		getTiles(startX, startY, endX, endY, tiles);
 		playerRect.x += velocity.x;
+		
 		for (Rectangle tile: tiles) {
 			if(playerRect.overlaps(tile)) {
 				velocity.x = 0;
 				break;
 			}
 		}
+		
+		getDoorTiles(startX, startY, endX, endY, doors);
+		for (Rectangle tile : doors) {
+			if (playerRect.overlaps(tile)) {
+				position.x = 33;
+			}
+		}
+		
 		getDeadlyTiles(startX, startY, endX, endY, deadlyTiles);
 		for (Rectangle tile: deadlyTiles) {
 			if(playerRect.overlaps(tile)) {
@@ -160,6 +170,14 @@ public class Player {
 				break;
 			}
 		}
+		
+		getDoorTiles(startX, startY, endX, endY, doors);
+		for (Rectangle tile : doors) {
+			if (playerRect.overlaps(tile)) {
+				position.x = 33;
+			}
+		}
+		
 		getDeadlyTiles(startX, startY, endX, endY, deadlyTiles);
 		for (Rectangle tile: deadlyTiles) {
 			if(playerRect.overlaps(tile)) {
@@ -209,6 +227,22 @@ public class Player {
 
 	private void getDeadlyTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
+		rectPool.freeAll(tiles);
+		tiles.clear();
+		for(int y = startY; y <= endY; y++) {
+			for(int x = startX; x <= endX; x++) {
+				Cell cell = layer.getCell(x, y);
+				if(cell != null) {
+					Rectangle rect = rectPool.obtain();
+					rect.set(x, y, 1, 1);
+					tiles.add(rect);
+				}
+			}
+		}
+	}
+	
+	private void getDoorTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
+		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(2);
 		rectPool.freeAll(tiles);
 		tiles.clear();
 		for(int y = startY; y <= endY; y++) {
