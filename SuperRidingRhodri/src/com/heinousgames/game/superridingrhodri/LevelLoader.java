@@ -38,7 +38,7 @@ public class LevelLoader {
 	
 	public void setCurrentLevel(Level set){
 		currentLevel = set;
-		currentTextures = set.getTextures();
+	//	currentTextures = set.getTextures();
 	}
 	
 	public void logic(){

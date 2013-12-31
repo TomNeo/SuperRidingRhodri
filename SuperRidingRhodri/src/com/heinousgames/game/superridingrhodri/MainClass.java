@@ -71,7 +71,7 @@ public class MainClass implements ApplicationListener {
 		 * this section of code will be redone and probably relocated, but I needed to start somewhere.
 		 */
 		levelLoader = new LevelLoader();
-		levelLoader.add(0, new LevelTemplate1());
+		levelLoader.add(0, new LevelTemplate2());
 		levelLoader.setCurrentLevel(levelLoader.queue.get(0));
 		
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
@@ -130,10 +130,10 @@ public class MainClass implements ApplicationListener {
 		renderer.setView(camera);
 		
 		//THIS IS THE NORMAL METHOD FOR RENDERER
-		//renderer.render();
+		renderer.render();
 		
 		//THIS IS THE RENDER METHOD FOR LEVELTEMPLATE1
-		renderer.renderMode1();
+		//renderer.renderMode1();
 			
 //		shapeRenderer.setProjectionMatrix(camera.combined);
 //		shapeRenderer.begin(ShapeType.Filled);

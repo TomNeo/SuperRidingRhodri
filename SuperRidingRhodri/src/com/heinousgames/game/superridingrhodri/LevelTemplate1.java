@@ -42,7 +42,6 @@ public class LevelTemplate1 implements Level{
 		firstDoor.setWidth(1);
 		firstDoor.setHeight(1);
 		firstDoor.setPos(28, 87);
-
 		toRender.add(firstDoor);
 	}
 
@@ -132,7 +131,7 @@ public class LevelTemplate1 implements Level{
 
 	//This was meant to grab out all of the texture regions found inside the tmx, but I had 
 	//a hard time figuring out how we would identify which one should render for which object
-	//Could probably go though it did help me debug so stuff. might be usefull.
+	//Could probably go through it, it did help me debug so stuff. might be usefull.
 	@Override
 	public TextureRegion[] getTextures(){
 		ArrayList<TextureRegion> list = new ArrayList<TextureRegion>();
@@ -160,7 +159,6 @@ public class LevelTemplate1 implements Level{
 	}
 	
 	public TextureRegion getTexture(String key){
-		
 		return null;
 	}
 	
