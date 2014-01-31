@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSets;
+import com.badlogic.gdx.math.Rectangle;
 
 //This is going to be a generic handle for objects that interact in the game. We can extend this object to define special actions (doors, have exits, enemies hurt you, ect...)
 //Most things (everything concerning rendering) will use this class type as the argument.
@@ -16,10 +17,11 @@ public class GenericObject extends MapObject {
 	// spriteframes, but when they render this will return a
 	// texture that is only the proper frame to render.
 	TextureRegion img;
-	public float xPos, yPos, width, height;
+	public float xPos, yPos, width, height = -1;
 	public String type;
 	MapObject ref;
 	private Level owner;
+	private Rectangle boundries = new Rectangle();
 
 	public GenericObject(String type, Level parent) {
 		this.type = type;
@@ -76,17 +78,18 @@ public class GenericObject extends MapObject {
 					img = tiles.getTile(src_id).getTextureRegion();
 				}
 			}
-			xPos = isFloat(ref.getProperties().get("x"));
-			yPos = 1.0f + isFloat(ref.getProperties().get("y"));
-			height = isFloat(ref.getProperties().get("height"));
-			width = isFloat(ref.getProperties().get("width"));
+			xPos = isValidPos(ref.getProperties().get("x"));
+			yPos = isValidPos(ref.getProperties().get("y"));
+			height = isValidDim(ref.getProperties().get("height"));
+			width = isValidDim(ref.getProperties().get("width"));
+			boundries.set(xPos, yPos, width, height);
 		} else {
 			//Might want to assign a dummy img, just so if we get something wrong, it won't crash it.
 		}
 	}
 	
 	//Poor nameing, more appropriately makeUsable
-	private float isFloat(Object value) {
+	private float isValidPos(Object value) {
 		float xReturn = -1;
 		if (value != null) {
 			try {
@@ -98,6 +101,33 @@ public class GenericObject extends MapObject {
 			return xReturn;
 		}
 		return xReturn;
+	}
+	
+	private float isValidDim(Object value){
+		float xReturn = -1;
+		if (value != null) {
+			try {
+				float x = Float.parseFloat(value.toString());
+				xReturn = x;
+			} catch (NumberFormatException e) {
+				return xReturn;
+			}
+			return xReturn;
+		}
+		return xReturn;	
+	}
+	
+	public Rectangle getBoundries(){
+		return boundries;
+	}
+	
+	public void setBoundries(Rectangle src){
+		boundries = src;
+	}
+	
+	//Returns true if the collision stops other collisions from being checked.
+	public boolean collided(){
+		return false;
 	}
 
 	public void setImg(TextureRegion set) {

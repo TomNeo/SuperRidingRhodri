@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="mountainTileset" tilewidth="32" tileheight="32">
+  <image source="tiles/mountainTileset.png" trans="ff00ff" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="door" tilewidth="32" tileheight="32">
+  <image source="door.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="bat" tilewidth="256" tileheight="32">
+  <image source="Object files/bat.png" trans="ff00ff" width="256" height="32"/>
+ </tileset>
+ <tileset firstgid="35" name="Alfred" tilewidth="205" tileheight="145">
+  <image source="Object files/Alfred.png" trans="ff00ff" width="256" height="256"/>
+ </tileset>
+ <layer name="Main Layer" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UywqAIBRFUXs/rKD+/2M7DQKJEkJJib1gj4Kb14HGAMD/LWpQo7JqS3scr1V1qr/5VqjGqf3wXG9VqlR14BzffXwh1h6x5qT+fy57TIFzZpPHHkfn2/Q268zIYY8Ypdrj+raGlvPbDAAAAAAAAAAAADwZftBhB2m42jgQJwAA
+  </data>
+ </layer>
+ <layer name="Deadly Layer" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAODfAC7KO00QJwAA
+  </data>
+ </layer>
+ <layer name="special door" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQREAAAgDoFWxf0lT7HwICUgAAAAAAAAAAABomuvAEwvmPUPJECcAAA==
+  </data>
+ </layer>
+ <objectgroup name="Background Objects" width="50" height="50">
+  <object name="door1" type="door" gid="33" x="402" y="387">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="33"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+  <object name="door2" type="door" gid="33" x="728" y="386">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="33"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+  <object name="alfred" type="Alfred" gid="35" x="560" y="382">
+   <properties>
+    <property name="height" value="3.8"/>
+    <property name="src_id" value="35"/>
+    <property name="width" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Foreground Objects" width="50" height="50">
+  <object name="bat1" type="bat" gid="34" x="770" y="368">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="34"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

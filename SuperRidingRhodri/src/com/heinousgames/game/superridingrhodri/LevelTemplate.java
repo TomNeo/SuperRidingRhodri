@@ -1,5 +1,7 @@
 package com.heinousgames.game.superridingrhodri;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -14,7 +16,8 @@ public class LevelTemplate implements Level{
 
 	int startX;
 	int startY;
-	private TiledMap map;	
+	private TiledMap map;
+	CustomPlayer player;
 	
 	public LevelTemplate(){
 		map = new TmxMapLoader().load("gfx/HelloRhodri.tmx");
@@ -27,7 +30,7 @@ public class LevelTemplate implements Level{
 	 * as possible for these level specific things
 	 */
 	@Override
-	public void render(OrthogonalTiledMapRenderer renderer) {
+	public void render(CustomTiledRenderer renderer) {
 	
 		/* This is just copied from player, using it as reference for extracting layer information 
 		 * 
@@ -53,7 +56,7 @@ public class LevelTemplate implements Level{
 
 	}
 	
-	public void logic(){
+	public void logic(float deltaTime){
 		//Level specific logic (cutscene, special one time thing, graphical manipulations)
 	}
 
@@ -70,12 +73,21 @@ public class LevelTemplate implements Level{
 
 	@Override
 	public int getStartY() {
-		// TODO Auto-generated method stub
 		return startY;
 	}
 
 	@Override
 	public TextureRegion[] getTextures() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public CustomPlayer getPlayer(){
+		return player;
+	}
+
+	@Override
+	public ArrayList<GenericObject> toRender() {
 		// TODO Auto-generated method stub
 		return null;
 	}

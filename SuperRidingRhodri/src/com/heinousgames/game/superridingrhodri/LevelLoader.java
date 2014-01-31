@@ -13,15 +13,28 @@ public class LevelLoader {
 	
 	TextureRegion[] currentTextures;
 	CustomTiledRenderer renderer;
+	CustomPlayer player;
+	Array<Level> queue;
+	Level currentLevel;
 
 	
 	LevelLoader(){
 		queue = new Array<Level>();
+		add(0, new ExampleLevel1());
+		setCurrentLevel(queue.get(0));
+		setPlayer(new CustomPlayer(currentLevel.getMap(), this));
 	}
 	
-	Array<Level> queue;
-	Level currentLevel;
 
+	private void setPlayer(CustomPlayer set){
+		player = set;
+	}
+	
+	public CustomPlayer getPlayer(){
+		return player;
+	}
+
+	//Not really being used for anything at this time. Was an initial way for me to see the textures brought in from the tmx file
 	public void getTextures(Level current){
 		currentTextures = current.getTextures();
 	}
@@ -41,9 +54,14 @@ public class LevelLoader {
 	//	currentTextures = set.getTextures();
 	}
 	
-	public void logic(){
-		//Place for level specific things and special effects and such. Really anything that might be needed for level specific
-		//physics or whatever.
+	public void tick(float deltaTime){
+		this.logic(deltaTime);
+		this.render();
+	}
+	
+	public void logic(float deltaTime){
+		currentLevel.logic(deltaTime);
+		player.updatePlayer(deltaTime);
 	}
 	
 	public void render(){

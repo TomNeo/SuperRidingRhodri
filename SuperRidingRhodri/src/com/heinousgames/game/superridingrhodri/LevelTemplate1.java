@@ -93,7 +93,7 @@ public class LevelTemplate1 implements Level{
 
 	}
 	
-	public void logic(){
+	public void logic(float deltaTime){
 		//Level specific logic (cutscene, special one time thing, graphical manipulations)
 	}
 	

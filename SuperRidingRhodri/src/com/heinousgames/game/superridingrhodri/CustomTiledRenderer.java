@@ -111,8 +111,8 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 	// This will be how i section off the other way we could render objects
 	public void renderMode2(MapObject object) {
 		GenericObject sameObject = returnSame(object);
-		spriteBatch.draw(sameObject.img.getTexture(), sameObject.xPos, sameObject.yPos,
-				sameObject.width, sameObject.height);
-
+		if(!"DUMMY".equals(sameObject.getType()))
+			//Width and height are not coming in correctly
+			spriteBatch.draw(sameObject.img.getTexture(), sameObject.xPos, sameObject.yPos, sameObject.width, sameObject.height);
 	}
 }

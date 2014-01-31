@@ -10,12 +10,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 
-public class Player {
+public class CustomPlayer {
 	
 	TiledMap map; 
+	LevelLoader home;
 	
-	public Player (TiledMap Map) {
+	public CustomPlayer (TiledMap Map, LevelLoader Home) {
 		this.map = Map;
+		this.home = Home;
 	}
 	
 	
@@ -53,35 +55,32 @@ public class Player {
 		this.map = newMap;
 	}
 	
-	/*
-	 * This is where collisions are checked or where the mapChange() is called from. No where else should be calling the maps to change (Theoretically) due to timing of objects and disposing ect.
-	 */
 	public void updatePlayer(float deltaTime) {
 		if(deltaTime == 0) return;
 		stateTime += deltaTime;
 		
-		if (position.x <= 8)
-			position.x = 8;
+		if (position.x <= 0)
+			position.x = 0;
 		
 		if (position.y <= 0)
-			position.set(8, 1);
+			position.set(home.getCurrentLevel().getStartX(), home.getCurrentLevel().getStartY());
 
 		// check input and apply to velocity & state
 		if((Gdx.input.isKeyPressed(Keys.SPACE)) && grounded) {
-			velocity.y += Player.JUMP_VELOCITY;
-			state = Player.State.Jumping;
+			velocity.y += CustomPlayer.JUMP_VELOCITY;
+			state = CustomPlayer.State.Jumping;
 			grounded = false;
 		}
 
 		if(Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A) || isTouched(0, 0.5f)) {
-			velocity.x = -Player.MAX_VELOCITY;
-			if (grounded) state = Player.State.Walking;
+			velocity.x = -CustomPlayer.MAX_VELOCITY;
+			if (grounded) state = CustomPlayer.State.Walking;
 			facesRight = false;
 		}
 
 		if(Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D) || isTouched(0.5f, 1)) {
-			velocity.x = Player.MAX_VELOCITY;
-			if(grounded) state = Player.State.Walking;
+			velocity.x = CustomPlayer.MAX_VELOCITY;
+			if(grounded) state = CustomPlayer.State.Walking;
 			facesRight = true;
 		}
 
@@ -96,7 +95,7 @@ public class Player {
 		// clamp the velocity to 0 if it's < 1, and set the state to standing
 		if(Math.abs(velocity.x) < 1) {
 			velocity.x = 0;
-			if(grounded) state = Player.State.Standing;
+			if(grounded) state = CustomPlayer.State.Standing;
 		}
 
 		// multiply by delta time so we know how far we go
@@ -136,7 +135,8 @@ public class Player {
 		getDeadlyTiles(startX, startY, endX, endY, deadlyTiles);
 		for (Rectangle tile: deadlyTiles) {
 			if(playerRect.overlaps(tile)) {
-				position.x = 8;
+				position.x = home.getCurrentLevel().getStartX();
+				position.y = home.getCurrentLevel().getStartY();
 				break;
 			}
 		}
@@ -174,17 +174,11 @@ public class Player {
 			}
 		}
 		
-		getDoorTiles(startX, startY, endX, endY, doors);
-		for (Rectangle tile : doors) {
-			if (playerRect.overlaps(tile)) {
-		    	position.x = 33;
-			}
-		}
 		
 		getDeadlyTiles(startX, startY, endX, endY, deadlyTiles);
 		for (Rectangle tile: deadlyTiles) {
 			if(playerRect.overlaps(tile)) {
-				position.set(14, 98);
+				position.y = home.currentLevel.getStartY();
 				break;
 			}
 		}
@@ -200,6 +194,7 @@ public class Player {
 		velocity.x *= Player.DAMPING;
 
 	}
+	
 	private boolean isTouched(float startX, float endX) {
 		// check if any finge is touch the area between startX and endX
 		// startX/endX are given between 0 (left edge of the screen) and 1 (right edge of the screen)
@@ -211,7 +206,7 @@ public class Player {
 		}
 		return false;
 	}
-	//This assumes any tiled information at that coordinates will be treated as a complete 1x1 unit.
+
 	private void getTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
 		rectPool.freeAll(tiles);
@@ -228,7 +223,6 @@ public class Player {
 		}
 	}
 
-	//This assumes any tiled information at that coordinates will be treated as a complete 1x1 unit.
 	private void getDeadlyTiles(int startX, int startY, int endX, int endY, Array<Rectangle> tiles) {
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(1);
 		rectPool.freeAll(tiles);
@@ -259,6 +253,75 @@ public class Player {
 //				}
 //			}
 //		}
+	}
+	
+	//Will be called at the level logic if we use additional tiled map layers to do special collision things(this is wide and allows for custom code per level)
+	public boolean collideSpecialTileset(TiledMapTileLayer special) {
+		boolean test = false;
+		rectPool.freeAll(tiles);
+		tiles.clear();
+		Rectangle playerRect = rectPool.obtain();
+		playerRect.set(position.x, position.y, Player.WIDTH, Player.HEIGHT);
+		int startX, startY, endX, endY;
+		if (velocity.x > 0) {
+				startX = endX = (int)(position.x + Player.WIDTH + velocity.x);
+		} else {
+				startX = endX = (int)(position.x + velocity.x);
+		}
+		startY = (int)(position.y);
+		endY = (int)(position.y + Player.HEIGHT);
+		playerRect.x += velocity.x;		
+		///	getTiles(startX, startY, endX, endY, tiles);
+		for(int y = startY; y <= endY; y++) {
+			for(int x = startX; x <= endX; x++) {
+				Cell cell = special.getCell(x, y);
+				if(cell != null) {
+					Rectangle rect = rectPool.obtain();
+					rect.set(x, y, 1, 1);
+					tiles.add(rect);
+				}
+			}
+		}
+		
+		for (Rectangle tile: tiles) {
+			if(playerRect.overlaps(tile)) {
+				test = true;
+				break;
+			}
+		}
+		
+		rectPool.freeAll(tiles);
+		tiles.clear();
+		if(velocity.y > 0) {
+			startY = endY = (int)(position.y + Player.HEIGHT + velocity.y);
+		} else {
+			startY = endY = (int)(position.y + velocity.y);
+		}
+		startX = (int)(position.x);
+		endX = (int)(position.x + Player.WIDTH);
+		
+		for(int y = startY; y <= endY; y++) {
+			for(int x = startX; x <= endX; x++) {
+				Cell cell = special.getCell(x, y);
+				if(cell != null) {
+					Rectangle rect = rectPool.obtain();
+					rect.set(x, y, 1, 1);
+					tiles.add(rect);
+				}
+			}
+		}
+		
+		for (Rectangle tile: tiles) {
+			if(playerRect.overlaps(tile)) {
+				test = true;
+				break;
+			}
+		}
+		rectPool.freeAll(tiles);
+		rectPool.free(playerRect);
+		tiles.clear();
+		return test;
+		
 	}
 
 }
