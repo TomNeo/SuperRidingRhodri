@@ -22,6 +22,7 @@ public class GenericObject extends MapObject {
 	MapObject ref;
 	private Level owner;
 	private Rectangle boundries = new Rectangle();
+	private TextureRegion display;
 
 	public GenericObject(String type, Level parent) {
 		this.type = type;
@@ -29,19 +30,29 @@ public class GenericObject extends MapObject {
 		ref = new MapObject();
 		ref.setName("DUMMY");
 		img = new TextureRegion();
+		display = new TextureRegion();
 	}
 
 	public GenericObject(MapObject src, Level owned) {
 		ref = src;
 		owner = owned;
 		constructFromRef();
+		display = new TextureRegion();
 	}
 
 	public void logic() {
 	}
 
 	public TextureRegion getImg() {
+		if(ref.getName().equals("alfred"))
+			return customRender();
 		return img;
+	}
+	
+	private TextureRegion customRender(){
+		display.setTexture(img.getTexture());
+		display.setRegion(28, 40, 58, 123);
+		return display;
 	}
 
 	public void setWidth(float w) {
@@ -133,5 +144,7 @@ public class GenericObject extends MapObject {
 	public void setImg(TextureRegion set) {
 		img = set;
 	}
+	
+	
 
 }

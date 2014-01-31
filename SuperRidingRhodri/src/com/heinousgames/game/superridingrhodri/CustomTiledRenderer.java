@@ -101,7 +101,7 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 		// the GenericObjects class to determine when/where it should actually
 		// render.
 		for (GenericObject item : current.toRender()) {
-			spriteBatch.draw(item.img.getTexture(), item.xPos, item.yPos,
+			spriteBatch.draw(item.getImg(), item.xPos, item.yPos,
 					item.width, item.height);
 		}
 
@@ -111,8 +111,10 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 	// This will be how i section off the other way we could render objects
 	public void renderMode2(MapObject object) {
 		GenericObject sameObject = returnSame(object);
-		if(!"DUMMY".equals(sameObject.getType()))
+		if(!"DUMMY".equals(sameObject.getType())){
 			//Width and height are not coming in correctly
-			spriteBatch.draw(sameObject.img.getTexture(), sameObject.xPos, sameObject.yPos, sameObject.width, sameObject.height);
+			spriteBatch.draw(sameObject.getImg(), sameObject.xPos, sameObject.yPos, sameObject.width, sameObject.height);
+//			spriteBatch.draw(sameObject.img.getTexture(), sameObject.xPos, sameObject.yPos, sameObject.width, sameObject.height);
+		}
 	}
 }
