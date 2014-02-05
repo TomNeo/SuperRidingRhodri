@@ -255,6 +255,11 @@ public class CustomPlayer {
 //		}
 	}
 	
+	public void moveTo(int newX, int newY){
+		position.x = newX;
+		position.y = newY;
+	}
+	
 	//Will be called at the level logic if we use additional tiled map layers to do special collision things(this is wide and allows for custom code per level)
 	public boolean collideSpecialTileset(TiledMapTileLayer special) {
 		boolean test = false;

@@ -15,4 +15,5 @@ public interface Level {
 	int getStartY();
 	TextureRegion[] getTextures();
 	ArrayList<GenericObject> toRender();
+	void setHome(LevelLoader levelLoader);
 }

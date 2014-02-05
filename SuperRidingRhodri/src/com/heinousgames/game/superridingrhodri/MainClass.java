@@ -29,7 +29,7 @@ public class MainClass implements ApplicationListener {
 	private LevelLoader levelLoader;
 	private Texture playerTexture;
 	private TextureRegion tRegion;
-	private Player player;
+	private CustomPlayer player;
 	private Animation stand;
 	private Animation walk;
 	private Animation jump;
@@ -84,7 +84,7 @@ public class MainClass implements ApplicationListener {
 		camera.update();
 
 		// create the rhodri we want to move around the world
-		player = new Player(map);
+		player = levelLoader.getPlayer();
 		player.position.set(levelLoader.getCurrentLevel().getStartX(),levelLoader.getCurrentLevel().getStartY());
 
 		// start the playback of the background music immediately

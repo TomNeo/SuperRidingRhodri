@@ -22,6 +22,7 @@ public class LevelLoader {
 		queue = new Array<Level>();
 		add(0, new ExampleLevel1());
 		setCurrentLevel(queue.get(0));
+		currentLevel.setHome(this);
 		setPlayer(new CustomPlayer(currentLevel.getMap(), this));
 	}
 	
@@ -61,7 +62,7 @@ public class LevelLoader {
 	
 	public void logic(float deltaTime){
 		currentLevel.logic(deltaTime);
-		player.updatePlayer(deltaTime);
+		//player.updatePlayer(deltaTime);
 	}
 	
 	public void render(){

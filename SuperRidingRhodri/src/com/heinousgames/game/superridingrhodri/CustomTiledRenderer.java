@@ -35,7 +35,7 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 	 * @see
 	 * com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer#renderObject
 	 * (com.badlogic.gdx.maps.MapObject) Still needs a little work. The numbers
-	 * are hard coded in as the position on the map i know they are supposd to
+	 * are hard coded in as the position on the map i know they are supposed to
 	 * be at. Still figuring out if these numbers will come from the tmx or the
 	 * level logic.
 	 */
@@ -51,7 +51,7 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 					texture = tiles.getTile(33).getTextureRegion();
 					spriteBatch.draw(texture.getTexture(), 28, 87, 1, 1);
 				} else if (tiles.size() > 1) {
-					// TODO decide how aniamtion will happen. here, or in the
+					// TODO decide how animation will happen. here, or in the
 					// object. get keyframe from logic and select proper frame
 					// for rendering animations
 				}

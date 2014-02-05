@@ -2,6 +2,8 @@ package com.heinousgames.game.superridingrhodri;
 
 import java.util.ArrayList;
 
+import javax.management.RuntimeErrorException;
+
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -75,8 +77,25 @@ public class ExampleLevel1 implements Level{
 	
 	private float timeInLevel = 0;
 	
+	public void setHome(LevelLoader val){
+		home = val;
+	}
+	
 	public void logic(float deltaTime){
-	timeInLevel = timeInLevel + deltaTime;	
+		timeInLevel = timeInLevel + deltaTime;	
+		TiledMapTileLayer specDoor;
+		try{
+			specDoor = (TiledMapTileLayer) this.map.getLayers().get("special door");
+		}
+		catch(RuntimeErrorException e){
+			specDoor = null;
+		}
+	
+		if (specDoor != null){
+			if (home.getPlayer().collideSpecialTileset(specDoor)){
+				home.getPlayer().moveTo(getStartX(), getStartY());
+			}
+		}
 	}
 
 	//Needed so that each map has the tmx connected to its code. LevelLoader can get map easily.
