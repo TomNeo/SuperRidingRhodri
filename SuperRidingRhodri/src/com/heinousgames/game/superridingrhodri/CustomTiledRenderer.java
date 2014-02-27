@@ -40,6 +40,10 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 	 * level logic.
 	 */
 	
+	public void useMap(TiledMap newMap){
+		map = newMap;
+	}
+	
 	@Override
 	public void renderObject(MapObject object) {
 		renderMode2(object);

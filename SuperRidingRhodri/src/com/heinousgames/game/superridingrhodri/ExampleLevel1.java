@@ -83,20 +83,53 @@ public class ExampleLevel1 implements Level{
 	
 	public void logic(float deltaTime){
 		timeInLevel = timeInLevel + deltaTime;	
-		TiledMapTileLayer specDoor;
-		try{
-			specDoor = (TiledMapTileLayer) this.map.getLayers().get("special door");
+		if (playerCollidesTile("special door")){
+			home.getPlayer().moveTo(getStartX(), getStartY());
 		}
-		catch(RuntimeErrorException e){
-			specDoor = null;
-		}
-	
-		if (specDoor != null){
-			if (home.getPlayer().collideSpecialTileset(specDoor)){
-				home.getPlayer().moveTo(getStartX(), getStartY());
-			}
+		if (playerCollidesObject("alfred")){
+			getObject("alfred");
 		}
 	}
+	
+	public GenericObject getObject(String name){
+		for(GenericObject obj : this.toRender()){
+			if(obj.getName().equals(name))
+				return obj;
+		}
+		return null;
+	}
+
+	
+	public boolean playerCollidesTile(String name){
+		TiledMapTileLayer specTile;
+		try{
+			specTile = (TiledMapTileLayer) this.map.getLayers().get(name);
+		}
+		catch(RuntimeErrorException e){
+			specTile = null;
+			return false;
+		}
+		if (specTile != null){
+			if(home.getPlayer().collideSpecialTileset(specTile)){
+				return true;
+			}
+			else{
+			return false;
+			}
+		}
+		return false;
+	}
+	
+
+	public boolean playerCollidesObject(String name){
+		for(GenericObject obj : this.toRender()){
+			if(obj.getName().equals(name))
+				return true;
+		}
+		return false;
+	}
+				
+	
 
 	//Needed so that each map has the tmx connected to its code. LevelLoader can get map easily.
 	@Override
@@ -123,6 +156,11 @@ public class ExampleLevel1 implements Level{
 	@Override
 	public ArrayList<GenericObject> toRender() {
 		return objects;
+	}
+	
+	public void changeStartPosition(int x, int y){
+		startX = x;
+		startY = y;
 	}
 	
 	

@@ -24,7 +24,7 @@ public class CustomPlayer {
 
 	public static float WIDTH;
 	public static float HEIGHT;
-	static float MAX_VELOCITY = 4f;
+	static float MAX_VELOCITY = 6f;
 	static float JUMP_VELOCITY = 40f;
 	static float DAMPING = 0.87f;
 
@@ -88,8 +88,8 @@ public class CustomPlayer {
 		velocity.add(0, GRAVITY);
 
 		// clamp the velocity to the maximum, x-axis only
-		if(Math.abs(velocity.x) > Player.MAX_VELOCITY) {
-			velocity.x = Math.signum(velocity.x) * Player.MAX_VELOCITY;
+		if(Math.abs(velocity.x) > CustomPlayer.MAX_VELOCITY) {
+			velocity.x = Math.signum(velocity.x) * CustomPlayer.MAX_VELOCITY;
 		}
 
 		// clamp the velocity to 0 if it's < 1, and set the state to standing
@@ -106,15 +106,15 @@ public class CustomPlayer {
 		// if the player is moving right, check the tiles to the right of it's
 		// right bounding box edge, otherwise check the ones to the left
 		Rectangle playerRect = rectPool.obtain();
-		playerRect.set(position.x, position.y, Player.WIDTH, Player.HEIGHT);
+		playerRect.set(position.x, position.y, CustomPlayer.WIDTH, CustomPlayer.HEIGHT);
 		int startX, startY, endX, endY;
 		if (velocity.x > 0) {
-			startX = endX = (int)(position.x + Player.WIDTH + velocity.x);
+			startX = endX = (int)(position.x + CustomPlayer.WIDTH + velocity.x);
 		} else {
 			startX = endX = (int)(position.x + velocity.x);
 		}
 		startY = (int)(position.y);
-		endY = (int)(position.y + Player.HEIGHT);
+		endY = (int)(position.y + CustomPlayer.HEIGHT);
 		getTiles(startX, startY, endX, endY, tiles);
 		playerRect.x += velocity.x;
 		
@@ -145,12 +145,12 @@ public class CustomPlayer {
 		// if the player is moving upwards, check the tiles to the top of it's
 		// top bounding box edge, otherwise check the ones to the bottom
 		if(velocity.y > 0) {
-			startY = endY = (int)(position.y + Player.HEIGHT + velocity.y);
+			startY = endY = (int)(position.y + CustomPlayer.HEIGHT + velocity.y);
 		} else {
 			startY = endY = (int)(position.y + velocity.y);
 		}
 		startX = (int)(position.x);
-		endX = (int)(position.x + Player.WIDTH);
+		endX = (int)(position.x + CustomPlayer.WIDTH);
 		getTiles(startX, startY, endX, endY, tiles);
 		playerRect.y += velocity.y;
 		for(Rectangle tile: tiles) {
@@ -159,7 +159,7 @@ public class CustomPlayer {
 				// so it is just below/above the tile we collided with
 				// this removes bouncing :)
 				if(velocity.y > 0) {
-					position.y = tile.y - Player.HEIGHT;
+					position.y = tile.y - CustomPlayer.HEIGHT;
 					
 					// we hit a block jumping upwards, let's destroy it!
 					/*TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(1);
@@ -191,7 +191,7 @@ public class CustomPlayer {
 
 		// Apply damping to the velocity on the x-axis so we don't
 		// walk infinitely once a key was pressed
-		velocity.x *= Player.DAMPING;
+		velocity.x *= CustomPlayer.DAMPING;
 
 	}
 	
@@ -266,16 +266,15 @@ public class CustomPlayer {
 		rectPool.freeAll(tiles);
 		tiles.clear();
 		Rectangle playerRect = rectPool.obtain();
-		playerRect.set(position.x, position.y, Player.WIDTH, Player.HEIGHT);
+		playerRect.set(position.x, position.y, CustomPlayer.WIDTH, CustomPlayer.HEIGHT);
 		int startX, startY, endX, endY;
 		if (velocity.x > 0) {
-				startX = endX = (int)(position.x + Player.WIDTH + velocity.x);
+				startX = endX = (int)(position.x + CustomPlayer.WIDTH);
 		} else {
-				startX = endX = (int)(position.x + velocity.x);
+				startX = endX = (int)(position.x);
 		}
 		startY = (int)(position.y);
-		endY = (int)(position.y + Player.HEIGHT);
-		playerRect.x += velocity.x;		
+		endY = (int)(position.y + CustomPlayer.HEIGHT);
 		///	getTiles(startX, startY, endX, endY, tiles);
 		for(int y = startY; y <= endY; y++) {
 			for(int x = startX; x <= endX; x++) {
@@ -298,12 +297,12 @@ public class CustomPlayer {
 		rectPool.freeAll(tiles);
 		tiles.clear();
 		if(velocity.y > 0) {
-			startY = endY = (int)(position.y + Player.HEIGHT + velocity.y);
+			startY = endY = (int)(position.y + CustomPlayer.HEIGHT + velocity.y);
 		} else {
 			startY = endY = (int)(position.y + velocity.y);
 		}
 		startX = (int)(position.x);
-		endX = (int)(position.x + Player.WIDTH);
+		endX = (int)(position.x + CustomPlayer.WIDTH);
 		
 		for(int y = startY; y <= endY; y++) {
 			for(int x = startX; x <= endX; x++) {

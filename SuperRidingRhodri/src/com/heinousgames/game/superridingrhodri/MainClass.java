@@ -51,8 +51,8 @@ public class MainClass implements ApplicationListener {
 		// figure out the width and height of the player for collision
 		// detection and rendering by converting a player frames pixel
 		// size into world units (1 unit == 16 pixels)
-		Player.WIDTH = 1 / 32f * tRegion.getRegionWidth();
-		Player.HEIGHT = 1 / 32f * tRegion.getRegionHeight();
+		CustomPlayer.WIDTH = 1 / 32f * tRegion.getRegionWidth();
+		CustomPlayer.HEIGHT = 1 / 32f * tRegion.getRegionHeight();
 
 		sin = 0;
 		time = 0;
@@ -71,11 +71,11 @@ public class MainClass implements ApplicationListener {
 		 * this section of code will be redone and probably relocated, but I needed to start somewhere.
 		 */
 		levelLoader = new LevelLoader();
-		levelLoader.add(0, new ExampleLevel1());
-		levelLoader.setCurrentLevel(levelLoader.queue.get(0));
+//		levelLoader.add(new ExampleLevel1());
+//		levelLoader.setCurrentLevel(levelLoader.queue.get(0));
 		
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
-		map = levelLoader.getCurrentLevel().getMap();
+//		map = levelLoader.getCurrentLevel().getMap();
 		renderer = new CustomTiledRenderer(levelLoader.getCurrentLevel(), 1 / 32f);
 		
 		// create an orthographic camera, shows us 30x20 units of the world
@@ -117,7 +117,7 @@ public class MainClass implements ApplicationListener {
 		}*/
 
 		// update the player (process input, collision detection, position update)
-		player.updatePlayer(delta);
+		//player.updatePlayer(delta);
 
 	
 		camera.position.x = player.position.x;
@@ -245,9 +245,9 @@ public class MainClass implements ApplicationListener {
 		SpriteBatch batch = renderer.getSpriteBatch();
 		batch.begin();
 		if(player.facesRight) {
-			batch.draw(frame, player.position.x, player.position.y, Player.WIDTH, Player.HEIGHT);
+			batch.draw(frame, player.position.x, player.position.y, CustomPlayer.WIDTH, CustomPlayer.HEIGHT);
 		} else {
-			batch.draw(frame, player.position.x + Player.WIDTH, player.position.y, -Player.WIDTH, Player.HEIGHT);
+			batch.draw(frame, player.position.x + CustomPlayer.WIDTH, player.position.y, -CustomPlayer.WIDTH, CustomPlayer.HEIGHT);
 		}
 		batch.end();
 	}

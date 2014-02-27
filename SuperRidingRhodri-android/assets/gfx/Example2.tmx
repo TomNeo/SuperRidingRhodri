@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="World4Tileset" tilewidth="32" tileheight="32">
+  <image source="tiles/World4Tileset.png" trans="ff00ff" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="door" tilewidth="32" tileheight="32">
+  <image source="door.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="bat" tilewidth="256" tileheight="32">
+  <image source="Object files/bat.png" trans="ff00ff" width="256" height="32"/>
+ </tileset>
+ <layer name="Main Layer" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3VywqAIBBGYbsILXr/5y2hhZtqxon6jfOBEAjqIdCUAABnhn2Mx5g+PkvEWn0vn50ijg4tdGih49xoHJF7vn4vysjV3Nv/o3W/0pAv5nvouGtoXTfCu5+loWXdKM9+1gbvuk+w7udp8Kz7lDnZ7jVPQ9Hz+1GjQwsdWujQQocWOrTQoYUOLXRo+UsHAADA32xvXQZyECcAAA==
+  </data>
+ </layer>
+ <layer name="Deadly Layer" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3T0QnAIAxAQSdw/3H70wFSNGnEO8iv4SmOAcAN5jun09GLjl509LK7YwYna88uFR2Z9xPZsbqv4p2/7Lq5o+rfZe6LnvlHR9bo0KFDhw4dOnTo0KFDh46z7wMAYNUDl1iFgRAnAAA=
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1" width="50" height="50">
+  <object gid="33" x="370" y="643"/>
+  <object gid="33" x="854" y="450"/>
+  <object gid="34" x="552" y="422"/>
+ </objectgroup>
+</map>

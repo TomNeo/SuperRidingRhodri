@@ -20,9 +20,10 @@ public class LevelLoader {
 	
 	LevelLoader(){
 		queue = new Array<Level>();
-		add(0, new ExampleLevel1());
+		add(new ExampleLevel1());
 		setCurrentLevel(queue.get(0));
 		currentLevel.setHome(this);
+/*********A HERO IS BORN**********/
 		setPlayer(new CustomPlayer(currentLevel.getMap(), this));
 	}
 	
@@ -41,9 +42,17 @@ public class LevelLoader {
 	}
 	
 	//The index field isn't really needed currently. 
-	public int add(int index, Level newLevel){
+	public int add(Level newLevel){
 		queue.add(newLevel);
-		return queue.size;
+		return queue.size - 1;
+	}
+	
+	public void playerChangeMap(Level newLevel){
+		setCurrentLevel(newLevel);
+		player.changeMap(currentLevel.getMap());
+		player.position.x = currentLevel.getStartX();
+		player.position.y = currentLevel.getStartY();
+		renderer.useMap(currentLevel.getMap());
 	}
 	
 	public Level getCurrentLevel(){
@@ -62,7 +71,7 @@ public class LevelLoader {
 	
 	public void logic(float deltaTime){
 		currentLevel.logic(deltaTime);
-		//player.updatePlayer(deltaTime);
+		player.updatePlayer(deltaTime);
 	}
 	
 	public void render(){
