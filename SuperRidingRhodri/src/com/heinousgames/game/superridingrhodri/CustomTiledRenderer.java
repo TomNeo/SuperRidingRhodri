@@ -40,8 +40,9 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 	 * level logic.
 	 */
 	
-	public void useMap(TiledMap newMap){
-		map = newMap;
+	public void moveTo(Level newLevel){
+		current = newLevel;
+		map = current.getMap();
 	}
 	
 	@Override
@@ -71,12 +72,6 @@ public class CustomTiledRenderer extends OrthogonalTiledMapRenderer {
 			}
 		}
 		return new GenericObject("DUMMY", current);
-	}
-
-	// Needs work. Wherever this is used needs to order player(map),
-	// levelLoader(level) and Renderer(map, level) at the same time.
-	public void changeLevel(Level map) {
-		current = map;
 	}
 
 	/*

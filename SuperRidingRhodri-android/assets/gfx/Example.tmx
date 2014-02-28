@@ -35,13 +35,6 @@
     <property name="width" value="1"/>
    </properties>
   </object>
-  <object name="door2" type="door" gid="33" x="728" y="386">
-   <properties>
-    <property name="height" value="1"/>
-    <property name="src_id" value="33"/>
-    <property name="width" value="1"/>
-   </properties>
-  </object>
   <object name="alfred" type="Alfred" gid="35" x="560" y="382">
    <properties>
     <property name="height" value="3.8"/>

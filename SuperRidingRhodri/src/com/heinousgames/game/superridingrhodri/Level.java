@@ -13,6 +13,9 @@ public interface Level {
 	TiledMap getMap();
 	int getStartX();
 	int getStartY();
+	void setStartX(int x);
+	void setStartY(int y);
+	void setQueue();
 	TextureRegion[] getTextures();
 	ArrayList<GenericObject> toRender();
 	void setHome(LevelLoader levelLoader);

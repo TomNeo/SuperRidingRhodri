@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 
-public class ExampleLevel1 implements Level{
+public class ExampleLevel2 implements Level{
 
 	int startX;
 	int startY;
@@ -24,8 +24,8 @@ public class ExampleLevel1 implements Level{
 	ArrayList<GenericObject> objects;
 	private LevelLoader home;
 	
-	public ExampleLevel1(){
-		map = new TmxMapLoader().load("gfx/Example.tmx");
+	public ExampleLevel2(){
+		map = new TmxMapLoader().load("gfx/Example2.tmx");
 		startX = 17;
 		startY = 44;
 		objects = assignObjects();
@@ -85,11 +85,11 @@ public class ExampleLevel1 implements Level{
 	
 	public void logic(float deltaTime){
 		timeInLevel = timeInLevel + deltaTime;	
-		if (playerCollidesTile("special door")){
-			home.playerChangeMap(home.queue.first(), 13, 31);
-		}
 		if (playerCollidesObject("door1")){
-			home.playerChangeMap(home.queue.first(), 25, 36);
+			home.playerChangeMap(home.queue.first(), 12, 3);
+		}
+		if (playerCollidesObject("door2")){
+			home.playerChangeMap(home.queue.first(), 17, 44);
 		}
 	}
 	
@@ -180,7 +180,7 @@ public class ExampleLevel1 implements Level{
 
 	@Override
 	public void setQueue() {
-		home.add(new ExampleLevel2());		
+		home.add(new ExampleLevel1());		
 	}
 	
 	

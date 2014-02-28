@@ -20,9 +20,9 @@ public class LevelLoader {
 	
 	LevelLoader(){
 		queue = new Array<Level>();
-		add(new ExampleLevel1());
-		setCurrentLevel(queue.get(0));
+		setCurrentLevel(new ExampleLevel1());
 		currentLevel.setHome(this);
+		currentLevel.setQueue();
 /*********A HERO IS BORN**********/
 		setPlayer(new CustomPlayer(currentLevel.getMap(), this));
 	}
@@ -49,10 +49,25 @@ public class LevelLoader {
 	
 	public void playerChangeMap(Level newLevel){
 		setCurrentLevel(newLevel);
+		queue.clear();
+		currentLevel.setQueue();
 		player.changeMap(currentLevel.getMap());
 		player.position.x = currentLevel.getStartX();
 		player.position.y = currentLevel.getStartY();
-		renderer.useMap(currentLevel.getMap());
+		player.changeMap(currentLevel.getMap());
+		renderer.moveTo(currentLevel);
+	}
+	
+	public void playerChangeMap(Level newLevel, int x, int y){
+		setCurrentLevel(newLevel);
+		queue.clear();
+		currentLevel.setQueue();
+		currentLevel.setStartX(x);
+		currentLevel.setStartY(y);
+		player.position.x = currentLevel.getStartX();
+		player.position.y = currentLevel.getStartY();
+		player.changeMap(currentLevel.getMap());
+		renderer.moveTo(currentLevel);
 	}
 	
 	public Level getCurrentLevel(){
@@ -61,6 +76,7 @@ public class LevelLoader {
 	
 	public void setCurrentLevel(Level set){
 		currentLevel = set;
+		currentLevel.setHome(this);
 	//	currentTextures = set.getTextures();
 	}
 	

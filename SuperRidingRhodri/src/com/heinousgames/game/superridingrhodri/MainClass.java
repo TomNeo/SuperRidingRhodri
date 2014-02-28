@@ -77,7 +77,7 @@ public class MainClass implements ApplicationListener {
 		// load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
 //		map = levelLoader.getCurrentLevel().getMap();
 		renderer = new CustomTiledRenderer(levelLoader.getCurrentLevel(), 1 / 32f);
-		
+		levelLoader.renderer = this.renderer;
 		// create an orthographic camera, shows us 30x20 units of the world
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 30, 20);

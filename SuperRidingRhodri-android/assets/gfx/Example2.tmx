@@ -20,8 +20,26 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1" width="50" height="50">
-  <object gid="33" x="370" y="643"/>
-  <object gid="33" x="854" y="450"/>
-  <object gid="34" x="552" y="422"/>
+  <object name="door1" type="door" gid="33" x="370" y="643">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="33"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+  <object name="door2" type="door" gid="33" x="854" y="450">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="33"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+  <object name="bat" type="bat" gid="34" x="552" y="422">
+   <properties>
+    <property name="height" value="1"/>
+    <property name="src_id" value="34"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

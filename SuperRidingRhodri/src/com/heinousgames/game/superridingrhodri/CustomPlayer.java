@@ -18,6 +18,7 @@ public class CustomPlayer {
 	public CustomPlayer (TiledMap Map, LevelLoader Home) {
 		this.map = Map;
 		this.home = Home;
+		boundries = new Rectangle();
 	}
 	
 	
@@ -34,6 +35,7 @@ public class CustomPlayer {
 		Jumping
 	}
 
+	public Rectangle boundries;
 	public final Vector2 position = new Vector2();
 	final Vector2 velocity = new Vector2();
 	public State state = State.Walking;
@@ -182,6 +184,7 @@ public class CustomPlayer {
 				break;
 			}
 		}
+		boundries = playerRect;
 		rectPool.free(playerRect);
 
 		// unscale the velocity by the inverse delta time and set 
@@ -192,7 +195,6 @@ public class CustomPlayer {
 		// Apply damping to the velocity on the x-axis so we don't
 		// walk infinitely once a key was pressed
 		velocity.x *= CustomPlayer.DAMPING;
-
 	}
 	
 	private boolean isTouched(float startX, float endX) {
